@@ -862,27 +862,29 @@ ul {
 
     .hamburger {
         display: flex;
+        z-index: 1003;
     }
 
     body.menu-open {
         overflow: hidden;
     }
 
-    body.menu-open::after {
-        content: '';
+    .nav-backdrop {
         position: fixed;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        z-index: 1000;
-        animation: fadeInOverlay 0.3s ease;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: 1001;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    @keyframes fadeInOverlay {
-        from { opacity: 0; }
-        to { opacity: 1; }
+    .nav-backdrop.active {
+        opacity: 1;
+        visibility: visible;
     }
 
     .nav-menu {
@@ -891,19 +893,18 @@ ul {
         top: 0;
         height: 100vh;
         height: 100dvh;
-        width: min(340px, 86vw);
-        background: rgba(12, 12, 15, 0.98);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        border-left: 1px solid rgba(0, 162, 199, 0.25);
-        box-shadow: -15px 0 50px rgba(0, 0, 0, 0.85);
+        width: min(320px, 85vw);
+        background: #0d0f14;
+        border-left: 1px solid rgba(0, 162, 199, 0.3);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 95px 24px 35px;
-        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        z-index: 1001;
+        padding: 90px 20px 30px;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1002;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-menu.active {
@@ -935,22 +936,23 @@ ul {
         padding: 14px 18px;
         border-radius: 12px;
         width: 100%;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: #14171f;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #f0f0f0;
+        transition: all 0.25s ease;
     }
 
     .nav-links li a:hover,
     .nav-links li a.active {
-        background: rgba(0, 162, 199, 0.15);
-        border-color: rgba(0, 162, 199, 0.4);
+        background: #002d3a;
+        border-color: #00a2c7;
         color: #ffffff;
-        padding-left: 22px;
-        box-shadow: 0 0 20px rgba(0, 162, 199, 0.15);
+        box-shadow: 0 0 15px rgba(0, 162, 199, 0.2);
     }
 
     .mobile-only-icon {
         display: inline-block;
-        color: var(--primary-light);
+        color: #00d2ff;
         font-size: 1.1rem;
         width: 22px;
         text-align: center;
@@ -980,7 +982,7 @@ ul {
         width: 40px;
         height: 40px;
         border-radius: 10px;
-        background: rgba(255, 255, 255, 0.05);
+        background: #14171f;
         border: 1px solid rgba(255, 255, 255, 0.08);
         display: flex;
         align-items: center;
