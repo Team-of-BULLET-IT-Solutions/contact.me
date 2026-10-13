@@ -275,3 +275,48 @@ if(canvas) {
     
     animate();
 }
+
+// Typewriter Effect for Hero Headline
+const typeTarget = document.getElementById('typewriter');
+if (typeTarget) {
+    const phrases = [
+        "Digital Future",
+        "Cloud Solutions",
+        "Cyber Defense",
+        "Software Vision",
+        "Network Systems"
+    ];
+    let phraseIndex = 0;
+    let charIndex = phrases[0].length;
+    let isDeleting = true;
+    let typingDelay = 100;
+    
+    setTimeout(() => {
+        runTypewriter();
+    }, 2200);
+
+    function runTypewriter() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isDeleting) {
+            typeTarget.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+            typingDelay = 45;
+        } else {
+            typeTarget.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+            typingDelay = 100;
+        }
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            typingDelay = 2200;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typingDelay = 400;
+        }
+
+        setTimeout(runTypewriter, typingDelay);
+    }
+}

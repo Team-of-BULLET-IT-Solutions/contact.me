@@ -72,6 +72,19 @@ ul {
     display: inline-block;
 }
 
+.typing-cursor {
+    display: inline-block;
+    color: var(--primary-light);
+    font-weight: 300;
+    margin-left: 4px;
+    animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 .subtitle {
     color: var(--primary-color);
     font-family: var(--font-body);
