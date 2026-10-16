@@ -3,118 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | BULLET IT SOLUTIONS</title>
+    <title>Privacy Policy | BULLET IT Solutions</title>
+    <meta name="description" content="How BULLET IT Solutions collects, uses and protects your information.">
+    <meta name="theme-color" content="#fbfcfe" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a0d14" media="(prefers-color-scheme: dark)">
+    <!-- Apply the saved or system theme before first paint -->
+    <script>
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            var saved = null;
+            try { saved = localStorage.getItem('theme'); } catch (e) {}
+            root.dataset.theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        })();
+    </script>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Favicon -->
     <link rel="icon" href="assets/logo.jpg" type="image/jpeg">
+    <!-- Main Style -->
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .page-content {
-            padding: 150px 0 80px;
-            min-height: 80vh;
-        }
-        .policy-card {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 50px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-        .policy-card h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-        }
-        .policy-card h3 {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin: 30px 0 15px;
-            font-family: var(--font-body);
-            font-weight: 600;
-        }
-        .policy-card p, .policy-card ul {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-        .policy-card ul {
-            padding-left: 20px;
-            list-style: disc;
-        }
-        .policy-card li {
-            margin-bottom: 8px;
-        }
-        
-        @media (max-width: 768px) {
-            .policy-card {
-                padding: 30px 20px;
-            }
-            .policy-card h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
 </head>
 <body>
-    <canvas id="hero-canvas"></canvas>
+    <!-- Classic GitHub corner ribbon -->
+    <div class="gh-ribbon">
+        <a href="https://github.com/team-of-bullet-it-solutions" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i>Follow us on GitHub</a>
+    </div>
 
+    <!-- Top bar -->
+    <div class="topbar">
+        <div class="container">
+            <span><span class="hide-sm">Enterprise IT for growing businesses &middot; </span><a href="mailto:bullet.itsolutions@gmail.com">bullet.itsolutions@gmail.com</a></span>
+            <span class="hide-sm"><i class="fas fa-location-dot"></i>Galle, Sri Lanka</span>
+        </div>
+    </div>
+
+        <!-- Navbar -->
     <header class="header">
         <div class="container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo.jpg" alt="BULLET IT Solutions Logo">
-                    <span class="logo-text">BULLET <span class="logo-accent">IT</span></span>
+            <nav class="navbar" aria-label="Main">
+                <a href="index.html#home" class="logo">
+                    <img src="assets/logo.jpg" alt="BULLET IT Solutions logo">
+                    <span>BULLET <span class="logo-accent">IT</span></span>
                 </a>
 
                 <div class="nav-backdrop"></div>
 
-                <div class="nav-menu">
+                <div class="nav-menu" id="nav-menu">
                     <ul class="nav-links">
-                        <li><a href="index.html#home"><i class="fas fa-home mobile-only-icon"></i> Home</a></li>
-                        <li><a href="index.html#about"><i class="fas fa-info-circle mobile-only-icon"></i> About</a></li>
-                        <li><a href="index.html#services"><i class="fas fa-layer-group mobile-only-icon"></i> Services</a></li>
-                        <li><a href="index.html#stats"><i class="fas fa-chart-line mobile-only-icon"></i> Impact</a></li>
-                        <li><a href="index.html#contact"><i class="fas fa-envelope mobile-only-icon"></i> Contact</a></li>
+                        <li><a href="index.html#home"><i class="fa-solid fa-house"></i>Home</a></li>
+                        <li><a href="index.html#services"><i class="fa-solid fa-layer-group"></i>Services</a></li>
+                        <li><a href="index.html#stats"><i class="fa-solid fa-chart-line"></i>Impact</a></li>
+                        <li><a href="index.html#about"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                        <li><a href="index.html#contact"><i class="fa-solid fa-envelope"></i>Contact</a></li>
                     </ul>
 
                     <div class="mobile-menu-footer">
-                        <a href="index.html#contact" class="btn primary-btn full-width mobile-cta">Start a Project <i class="fas fa-paper-plane"></i></a>
-                        <div class="mobile-social-links">
-                            <a href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://github.com/team-of-bullet-it-solutions" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="mailto:bullet.itsolutions@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="index.html#contact" class="btn btn-dark btn-block mobile-cta">Get a free consultation <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                        <div class="social-icons">
+                            <a class="icon-btn linkedin" href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="icon-btn" href="https://github.com/team-of-bullet-it-solutions" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a class="icon-btn" href="mailto:bullet.itsolutions@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="nav-actions">
-                    <a href="index.html#contact" class="btn nav-btn">Let's Talk <i class="fas fa-arrow-right"></i></a>
-                    <div class="hamburger" aria-label="Toggle Navigation">
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                    </div>
+                <div class="nav-right">
+                    <a class="icon-btn linkedin" href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" target="_blank" rel="noopener" aria-label="BULLET IT on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <button class="icon-btn theme-toggle" type="button" aria-label="Switch between light and dark theme"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
+                    <a href="index.html#contact" class="btn btn-dark btn-sm nav-cta">Let's talk <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                    <button class="hamburger" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
+                        <span></span><span></span><span></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <div class="page-content container">
-        <div class="policy-card fade-in">
-            <h1>Privacy <span class="gradient-text">Policy</span></h1>
-            <p><strong>Effective Date:</strong> October 2026</p>
-            
-            <p>At BULLET IT Solutions, your privacy and the security of your data are our highest priorities. This Privacy Policy outlines how we collect, use, process, and protect your information when you use our enterprise IT services and website.</p>
+    <main class="page-content">
+        <div class="container">
+            <article class="policy-card reveal">
+                <span class="eyebrow">Legal</span>
+                <h1>Privacy <span class="hl">policy</span></h1>
+                <p class="meta"><strong>Effective date:</strong> October 2026</p>
 
-            <h3>1. Information We Collect</h3>
+                <p>At BULLET IT Solutions, your privacy and the security of your data are our highest priorities. This Privacy Policy outlines how we collect, use, process, and protect your information when you use our enterprise IT services and website.</p>
+
+            <h2>1. Information We Collect</h2>
             <p>We collect information that you voluntarily provide to us when expressing an interest in obtaining information about us or our products and services. This may include:</p>
             <ul>
                 <li><strong>Personal Data:</strong> Name, email address, phone number, and company details provided through our contact forms.</li>
                 <li><strong>Technical Data:</strong> IP addresses, browser types, and usage data automatically collected when you navigate our website to improve our infrastructure.</li>
             </ul>
 
-            <h3>2. How We Use Your Information</h3>
+            <h2>2. How We Use Your Information</h2>
             <p>We use the information we collect or receive to:</p>
             <ul>
                 <li>Provide, operate, and maintain our enterprise IT solutions.</li>
@@ -123,24 +109,53 @@
                 <li>Send administrative information, updates, and security alerts.</li>
             </ul>
 
-            <h3>3. Data Security (The Bullet Standard)</h3>
+            <h2>3. Data Security (The Bullet Standard)</h2>
             <p>As a technology company focused on high-level architecture and security, we implement robust, industry-standard security measures to protect your personal information. We utilize zero-trust architectures, end-to-end encryption, and secure server environments to prevent unauthorized access, data loss, or breaches.</p>
 
-            <h3>4. Sharing Your Information</h3>
+            <h2>4. Sharing Your Information</h2>
             <p>We do not sell, trade, or rent your personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information with our trusted business partners and infrastructure providers solely for the purposes outlined above.</p>
 
-            <h3>5. Your Rights</h3>
+            <h2>5. Your Rights</h2>
             <p>Depending on your region, you may have rights to request access to, correction of, or deletion of your personal data. If you wish to exercise any of these rights, please contact us.</p>
 
-            <h3>6. Contact Us</h3>
+            <h2>6. Contact Us</h2>
             <p>If you have questions or comments about this policy, you may email us at <strong>bullet.itsolutions@gmail.com</strong> or contact us via our main website form.</p>
+            </article>
         </div>
-    </div>
+    </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-bottom" style="text-align: center; width: 100%;">
-                <p>&copy; 2026 BULLET IT Solutions. All Rights Reserved.</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html#home" class="logo">
+                        <img src="assets/logo.jpg" alt="" class="footer-logo">
+                        <span>BULLET <span class="logo-accent">IT</span></span>
+                    </a>
+                    <p>Enterprise IT solutions built for speed, precision and reliability.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick links</h3>
+                    <ul>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#about">About us</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect</h3>
+                    <div class="social-icons">
+                        <a class="icon-btn linkedin" href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="icon-btn" href="https://github.com/team-of-bullet-it-solutions" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="icon-btn" href="mailto:bullet.itsolutions@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span class="year">2026</span> BULLET IT Solutions. All rights reserved.</p>
+                <p>Galle, Sri Lanka</p>
             </div>
         </div>
     </footer>
@@ -148,4 +163,3 @@
     <script src="js/main.js"></script>
 </body>
 </html>
-

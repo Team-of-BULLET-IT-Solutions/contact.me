@@ -2,24 +2,25 @@
 
 ![BULLET IT Solutions](assets/logo.jpg)
 
-An elite, high-performance website for **BULLET IT Solutions** — an agile tech startup delivering enterprise-grade digital infrastructure. The site features a custom-built, interactive HTML5 Canvas background with floating network architectures and high-speed cyan bullets, paired with a modern glassmorphism UI.
+The website for **BULLET IT Solutions**, an IT company in Galle, Sri Lanka offering cloud, cybersecurity, networking, custom software and IT support. Clean SaaS-style layout with light and dark themes.
 
 ## 🚀 Live Preview
 **[Visit the Website](https://team-of-bullet-it-solutions.github.io/contact.me/)**
 
 ## ✨ Features
-- **Custom HTML5 Canvas Animation:** High-speed cyan bullets and slow-moving nebula gradient network nodes (`hero-canvas`).
-- **Glassmorphism UI:** Semi-transparent, blurred UI elements for a premium, futuristic look.
-- **Responsive Design:** Fully optimized for desktop, tablet, and mobile devices.
-- **Direct Email Integration:** Contact form submits directly to the official email via FormSubmit.co.
-- **Interactive Easter Egg:** Click the logo to trigger a high-speed bullet shower.
+- **Light and dark themes:** Follows the visitor's system setting, with a toggle in the nav that is remembered between visits.
+- **SaaS-style hero:** Announcement pill, bold headline, floating stat cards and a dashboard preview.
+- **Service strip and impact band:** Five services overlapping a navy band with the four-pillar diagram and count-up stats.
+- **Classic GitHub ribbon:** Green "Follow us on GitHub" corner ribbon.
+- **Responsive design:** Slide-in mobile menu and layouts tuned for phones, tablets and desktops.
+- **Email integration:** The contact form sends to the official email through FormSubmit.co without leaving the page.
 
 ## 🛠️ Technologies Used
 - **HTML5** (Semantic structure)
-- **CSS3** (Flexbox, Grid, CSS Variables, Backdrop-filter, Animations)
-- **Vanilla JavaScript** (Canvas API for animations, DOM manipulation)
-- **FontAwesome 6** (Icons)
-- **Google Fonts** (Syncopate, Inter)
+- **CSS3** (Grid, Flexbox, CSS custom properties for theming)
+- **Vanilla JavaScript** (Theme toggle, mobile menu, scroll reveals, form handling)
+- **Font Awesome 6** (Icons)
+- **Google Fonts** (Plus Jakarta Sans)
 
 ## 📦 Local Setup
 1. Clone the repository:
