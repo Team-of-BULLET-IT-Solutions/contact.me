@@ -1,348 +1,131 @@
-// Mobile Menu Toggle
+// Theme toggle (the saved or system theme is applied in <head> before first paint)
+const root = document.documentElement;
+const themeToggle = document.querySelector('.theme-toggle');
+const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+function savedTheme() {
+    try { return localStorage.getItem('theme'); } catch (e) { return null; }
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+}
+
+// Follow the system setting until the visitor picks a theme themselves
+darkQuery.addEventListener('change', (e) => {
+    if (!savedTheme()) root.dataset.theme = e.matches ? 'dark' : 'light';
+});
+
+// Mobile menu
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navBackdrop = document.querySelector('.nav-backdrop');
 
-function closeMobileMenu() {
-    if (hamburger) hamburger.classList.remove('active');
-    if (navMenu) navMenu.classList.remove('active');
-    if (navBackdrop) navBackdrop.classList.remove('active');
-    document.body.classList.remove('menu-open');
+function setMenu(open) {
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    navMenu.classList.toggle('active', open);
+    navBackdrop.classList.toggle('active', open);
+    document.body.classList.toggle('menu-open', open);
 }
 
-function openMobileMenu() {
-    if (hamburger) hamburger.classList.add('active');
-    if (navMenu) navMenu.classList.add('active');
-    if (navBackdrop) navBackdrop.classList.add('active');
-    document.body.classList.add('menu-open');
-}
-
-if (hamburger && navMenu) {
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (navMenu.classList.contains('active')) {
-            closeMobileMenu();
-        } else {
-            openMobileMenu();
-        }
-    });
-
-    if (navBackdrop) {
-        navBackdrop.addEventListener('click', closeMobileMenu);
-    }
-
-    document.querySelectorAll('.nav-links li a, .mobile-cta').forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
-    });
-
+if (hamburger && navMenu && navBackdrop) {
+    hamburger.addEventListener('click', () => setMenu(!navMenu.classList.contains('active')));
+    navBackdrop.addEventListener('click', () => setMenu(false));
+    navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMobileMenu();
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) setMenu(false);
     });
 }
 
-// Navbar background on scroll
+// Header background once the page scrolls
 const header = document.querySelector('.header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
+if (header) {
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}
 
-// Scroll Reveal Animations
-const revealElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in');
-
-const revealCallback = (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            // Remove observer after animation
-            if(!entry.target.classList.contains('counter')) {
+// Reveal on scroll
+const revealElements = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
-        }
-    });
-};
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
+} else {
+    revealElements.forEach(el => el.classList.add('visible'));
+}
 
-const revealObserver = new IntersectionObserver(revealCallback, {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-});
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-// Number Counter Animation for Stats
+// Count-up animation for the impact numbers
 const counters = document.querySelectorAll('.counter');
-let animated = false;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const statsBlock = document.querySelector('.stats');
 
-const startCounters = (entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !animated) {
-            animated = true;
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const duration = 2000; // ms
-                const increment = target / (duration / 16); // 60fps
-                
-                let current = 0;
-                const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                updateCounter();
-            });
-        }
-    });
-};
-
-const statsSection = document.querySelector('.stats-section');
-if(statsSection) {
-    const statsObserver = new IntersectionObserver(startCounters, { threshold: 0.5 });
-    statsObserver.observe(statsSection);
+if (statsBlock && counters.length && !reduceMotion && 'IntersectionObserver' in window) {
+    counters.forEach(counter => { counter.textContent = '0'; });
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        observer.disconnect();
+        counters.forEach(counter => {
+            const target = +counter.dataset.target;
+            const start = performance.now();
+            const duration = 1600;
+            const tick = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                counter.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3)));
+                if (progress < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        });
+    }, { threshold: 0.4 });
+    statsObserver.observe(statsBlock);
 }
 
-// Form submission handler
+// Contact form: send through FormSubmit's AJAX endpoint so visitors stay on the page
 const form = document.querySelector('.contact-form');
-if(form) {
-    form.addEventListener('submit', (e) => {
+if (form) {
+    const status = form.querySelector('.form-status');
+    const button = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const btn = form.querySelector('button');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        
-        setTimeout(() => {
-            btn.innerHTML = 'Sent Successfully <i class="fas fa-check"></i>';
-            btn.style.backgroundColor = '#10b981'; // Success green
+        const original = button.innerHTML;
+        button.disabled = true;
+        button.innerHTML = 'Sending... <span class="arrow"><i class="fas fa-spinner fa-spin"></i></span>';
+        status.textContent = '';
+        status.className = 'form-status';
+
+        try {
+            const endpoint = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: new FormData(form)
+            });
+            if (!response.ok) throw new Error('Request failed');
             form.reset();
-            
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.backgroundColor = '';
-            }, 3000);
-        }, 1500);
+            status.textContent = 'Thanks! Your message was sent. We will reply within 24 hours.';
+            status.classList.add('ok');
+        } catch (err) {
+            status.textContent = 'Your message could not be sent. Please email us at bullet.itsolutions@gmail.com.';
+            status.classList.add('err');
+        } finally {
+            button.disabled = false;
+            button.innerHTML = original;
+        }
     });
 }
 
-// Custom Nebula and Speed Bullets Animation
-const canvas = document.getElementById('hero-canvas');
-if(canvas) {
-    const ctx = canvas.getContext('2d');
-    
-    let width, height;
-    
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-    
-    // Nebula properties
-    let time = 0;
-    
-    // Speed Bullets (Shower triggered by Logo click)
-    let bullets = [];
-    class Bullet {
-        constructor() {
-            this.x = -200 - Math.random() * 800; // Start off-screen left
-            this.y = Math.random() * height;
-            this.length = 80 + Math.random() * 150;
-            this.speed = 40 + Math.random() * 60; // Extremely fast
-            this.thickness = 2 + Math.random() * 4;
-            this.opacity = 0.6 + Math.random() * 0.4;
-            this.active = true;
-        }
-        update() {
-            if(!this.active) return;
-            this.x += this.speed;
-            if(this.x - this.length > width) {
-                this.active = false; // Deactivate when off-screen
-            }
-        }
-        draw() {
-            if(!this.active) return;
-            // Draw the bullet head (bright white-cyan center)
-            ctx.beginPath();
-            ctx.ellipse(this.x, this.y, this.thickness * 3, this.thickness * 1.2, 0, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity + 0.2})`;
-            ctx.fill();
-            
-            // Draw the fading trail behind the bullet
-            ctx.beginPath();
-            ctx.moveTo(this.x, this.y - this.thickness);
-            ctx.lineTo(this.x - this.length, this.y);
-            ctx.lineTo(this.x, this.y + this.thickness);
-            ctx.closePath();
-            
-            // Gradient for tail
-            const grad = ctx.createLinearGradient(this.x, this.y, this.x - this.length, this.y);
-            grad.addColorStop(0, `rgba(0, 220, 255, ${this.opacity})`);
-            grad.addColorStop(1, `rgba(0, 162, 199, 0)`);
-            
-            ctx.fillStyle = grad;
-            ctx.fill();
-            
-            // Glowing aura
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = '#00a2c7';
-            ctx.fill();
-            ctx.shadowBlur = 0;
-        }
-    }
-    
-    // Trigger bullet shower on logo click
-    const logos = document.querySelectorAll('.logo, .about-logo, .footer-logo');
-    logos.forEach(logo => {
-        logo.style.cursor = 'pointer';
-        logo.addEventListener('click', (e) => {
-            if(e.currentTarget.tagName === 'A') e.preventDefault();
-            
-            // Create a massive shower of 100 bullets
-            for(let i=0; i<100; i++) {
-                bullets.push(new Bullet());
-            }
-            
-            // Clean up inactive bullets array to keep memory usage low
-            bullets = bullets.filter(b => b.active);
-        });
-    });
-    
-    // Nebula Architecture (Network Nodes)
-    const nodes = [];
-    class Node {
-        constructor() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.8;
-            this.vy = (Math.random() - 0.5) * 0.8;
-            this.radius = Math.random() * 2 + 1;
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            
-            // Bounce off edges
-            if(this.x < 0 || this.x > width) this.vx *= -1;
-            if(this.y < 0 || this.y > height) this.vy *= -1;
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 162, 199, 0.6)';
-            ctx.fill();
-        }
-    }
-    
-    for(let i=0; i<70; i++) {
-        nodes.push(new Node());
-    }
-    
-    function drawArchitecture() {
-        nodes.forEach(node => {
-            node.update();
-            node.draw();
-        });
-        
-        // Draw connecting lines
-        for(let i=0; i<nodes.length; i++) {
-            for(let j=i+1; j<nodes.length; j++) {
-                const dx = nodes[i].x - nodes[j].x;
-                const dy = nodes[i].y - nodes[j].y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                
-                if(dist < 150) {
-                    ctx.beginPath();
-                    ctx.moveTo(nodes[i].x, nodes[i].y);
-                    ctx.lineTo(nodes[j].x, nodes[j].y);
-                    ctx.strokeStyle = `rgba(0, 162, 199, ${0.3 - (dist/150)*0.3})`;
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-    
-    function drawNebula() {
-        // Create a moving gradient background for nebula effect
-        const cx = width / 2 + Math.sin(time * 0.0005) * (width * 0.3);
-        const cy = height / 2 + Math.cos(time * 0.0007) * (height * 0.3);
-        
-        const gradient = ctx.createRadialGradient(cx, cy, 0, width/2, height/2, Math.max(width, height) * 0.8);
-        gradient.addColorStop(0, 'rgba(0, 120, 160, 0.15)');
-        gradient.addColorStop(0.4, 'rgba(0, 60, 90, 0.08)');
-        gradient.addColorStop(1, 'rgba(10, 10, 10, 0)');
-        
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, width, height);
-    }
-    
-    function animate() {
-        // Dark background with slight transparency for motion trails
-        ctx.fillStyle = 'rgba(10, 10, 10, 0.4)';
-        ctx.fillRect(0, 0, width, height);
-        
-        drawNebula();
-        drawArchitecture();
-        
-        bullets.forEach(bullet => {
-            bullet.update();
-            bullet.draw();
-        });
-        
-        time += 16;
-        requestAnimationFrame(animate);
-    }
-    
-    animate();
-}
-
-// Typewriter Effect for Hero Headline
-const typeTarget = document.getElementById('typewriter');
-if (typeTarget) {
-    const phrases = [
-        "Digital Future",
-        "Cloud Solutions",
-        "Cyber Defense",
-        "Software Vision",
-        "Network Systems"
-    ];
-    let phraseIndex = 0;
-    let charIndex = phrases[0].length;
-    let isDeleting = true;
-    let typingDelay = 100;
-    
-    setTimeout(() => {
-        runTypewriter();
-    }, 2200);
-
-    function runTypewriter() {
-        const currentPhrase = phrases[phraseIndex];
-        
-        if (isDeleting) {
-            typeTarget.textContent = currentPhrase.substring(0, charIndex - 1);
-            charIndex--;
-            typingDelay = 45;
-        } else {
-            typeTarget.textContent = currentPhrase.substring(0, charIndex + 1);
-            charIndex++;
-            typingDelay = 100;
-        }
-
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            typingDelay = 2200;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            typingDelay = 400;
-        }
-
-        setTimeout(runTypewriter, typingDelay);
-    }
-}
+// Footer year
+document.querySelectorAll('.year').forEach(el => { el.textContent = new Date().getFullYear(); });

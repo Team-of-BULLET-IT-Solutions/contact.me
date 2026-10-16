@@ -3,282 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BULLET IT SOLUTIONS | Enterprise Tech</title>
+    <title>BULLET IT Solutions | Secure, Modern IT</title>
+    <meta name="description" content="BULLET IT Solutions: cloud, cybersecurity, networking, custom software and IT support from Galle, Sri Lanka.">
+    <meta name="theme-color" content="#fbfcfe" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a0d14" media="(prefers-color-scheme: dark)">
+    <!-- Apply the saved or system theme before first paint -->
+    <script>
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            var saved = null;
+            try { saved = localStorage.getItem('theme'); } catch (e) {}
+            root.dataset.theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        })();
+    </script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" href="assets/logo.jpg" type="image/jpeg">
     <!-- Main Style -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Full-page Background Canvas -->
-    <canvas id="hero-canvas"></canvas>
+    <!-- Classic GitHub corner ribbon -->
+    <div class="gh-ribbon">
+        <a href="https://github.com/team-of-bullet-it-solutions" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i>Follow us on GitHub</a>
+    </div>
+
+    <!-- Top bar -->
+    <div class="topbar">
+        <div class="container">
+            <span><span class="hide-sm">Enterprise IT for growing businesses &middot; </span><a href="mailto:bullet.itsolutions@gmail.com">bullet.itsolutions@gmail.com</a></span>
+            <span class="hide-sm"><i class="fas fa-location-dot"></i>Galle, Sri Lanka</span>
+        </div>
+    </div>
 
     <!-- Navbar -->
     <header class="header">
         <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <img src="assets/logo.jpg" alt="BULLET IT Solutions Logo">
-                    <span class="logo-text">BULLET <span class="logo-accent">IT</span></span>
+            <nav class="navbar" aria-label="Main">
+                <a href="#home" class="logo">
+                    <img src="assets/logo.jpg" alt="BULLET IT Solutions logo">
+                    <span>BULLET <span class="logo-accent">IT</span></span>
                 </a>
 
                 <div class="nav-backdrop"></div>
 
-                <div class="nav-menu">
+                <div class="nav-menu" id="nav-menu">
                     <ul class="nav-links">
-                        <li><a href="#home"><i class="fas fa-home mobile-only-icon"></i> Home</a></li>
-                        <li><a href="#about"><i class="fas fa-info-circle mobile-only-icon"></i> About</a></li>
-                        <li><a href="#services"><i class="fas fa-layer-group mobile-only-icon"></i> Services</a></li>
-                        <li><a href="#stats"><i class="fas fa-chart-line mobile-only-icon"></i> Impact</a></li>
-                        <li><a href="#contact"><i class="fas fa-envelope mobile-only-icon"></i> Contact</a></li>
+                        <li><a href="#home"><i class="fa-solid fa-house"></i>Home</a></li>
+                        <li><a href="#services"><i class="fa-solid fa-layer-group"></i>Services</a></li>
+                        <li><a href="#stats"><i class="fa-solid fa-chart-line"></i>Impact</a></li>
+                        <li><a href="#about"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                        <li><a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a></li>
                     </ul>
 
                     <div class="mobile-menu-footer">
-                        <a href="#contact" class="btn primary-btn full-width mobile-cta">Start a Project <i class="fas fa-paper-plane"></i></a>
-                        <div class="mobile-social-links">
-                            <a href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://github.com/team-of-bullet-it-solutions" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="mailto:bullet.itsolutions@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="#contact" class="btn btn-dark btn-block mobile-cta">Get a free consultation <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                        <div class="social-icons">
+                            <a class="icon-btn linkedin" href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="icon-btn" href="https://github.com/team-of-bullet-it-solutions" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a class="icon-btn" href="mailto:bullet.itsolutions@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="nav-actions">
-                    <a href="#contact" class="btn nav-btn">Let's Talk <i class="fas fa-arrow-right"></i></a>
-                    <div class="hamburger" aria-label="Toggle Navigation">
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                    </div>
+                <div class="nav-right">
+                    <a class="icon-btn linkedin" href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" target="_blank" rel="noopener" aria-label="BULLET IT on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <button class="icon-btn theme-toggle" type="button" aria-label="Switch between light and dark theme"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
+                    <a href="#contact" class="btn btn-dark btn-sm nav-cta">Let's talk <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                    <button class="hamburger" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
+                        <span></span><span></span><span></span>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <div class="hero-badge fade-in">NEXT-GEN IT SOLUTIONS</div>
-            <h1 class="fade-in delay-1">
-                <span class="hero-line">Innovating Your</span>
-                <span class="hero-line typewriter-line"><span class="gradient-text" id="typewriter">Digital Future</span><span class="typing-cursor">|</span></span>
-            </h1>
-            <p class="fade-in delay-2">An agile tech startup delivering enterprise-grade digital infrastructure. We bring fresh perspectives and elite execution to your IT challenges.</p>
-            <div class="hero-actions fade-in delay-3">
-                <a href="#contact" class="btn primary-btn">Start a Project</a>
-                <a href="#services" class="btn outline-btn">Explore Services</a>
-            </div>
-        </div>
+    <main>
+        <!-- Hero -->
+        <div class="hero-wrap">
+            <div class="grid-bg"></div>
+            <div class="glow glow-a"></div>
+            <div class="glow glow-b"></div>
 
-    </section>
+            <section id="home" class="hero container">
+                <div class="float-card float-1" aria-hidden="true">
+                    <div class="ico"><i class="fas fa-shield-halved"></i></div>
+                    <small>Threats blocked this month</small>
+                    <strong>12,480</strong><span class="up">+18%</span>
+                </div>
+                <div class="float-card float-2" aria-hidden="true">
+                    <div class="ico"><i class="fas fa-cloud"></i></div>
+                    <small>Cloud migration progress</small>
+                    <strong>72%</strong>
+                    <div class="bar"><span></span></div>
+                </div>
 
-    <!-- About Section -->
-    <section id="about" class="about section-padding">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image slide-in-left">
-                    <div class="glass-card image-wrapper">
-                        <img src="assets/logo.jpg" alt="Bullet IT Solutions" class="about-logo">
-                        <div class="glow-effect"></div>
+                <a class="pill" href="#services"><em>New</em> Managed cloud backups <i class="fas fa-arrow-right"></i></a>
+                <h1>Your trusted partner for <span class="hl">secure, modern IT</span></h1>
+                <p class="lead">Cloud, cybersecurity, networks and custom software, set up and looked after by one dedicated team.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-dark">Get a free consultation <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+                    <a href="#services" class="btn btn-light">Explore services</a>
+                </div>
+                <div class="trust">
+                    <span><i class="fas fa-check"></i>Free first assessment</span>
+                    <span><i class="fas fa-check"></i>Support within 24 hours</span>
+                    <span><i class="fas fa-check"></i>No lock-in contracts</span>
+                </div>
+
+                <p class="logos-label">Technologies we work with</p>
+                <div class="logos">
+                    <span><i class="fab fa-aws"></i>AWS</span>
+                    <span><i class="fab fa-microsoft"></i>Microsoft Azure</span>
+                    <span><i class="fab fa-google"></i>Google Cloud</span>
+                    <span>Cisco</span>
+                    <span>Fortinet</span>
+                    <span>Microsoft 365</span>
+                </div>
+
+                <div class="mock" aria-hidden="true">
+                    <aside>
+                        <b><img src="assets/logo.jpg" alt="">Bullet Console</b>
+                        <span class="active">Overview</span>
+                        <span>Servers</span>
+                        <span>Security</span>
+                        <span>Backups</span>
+                        <span>Support tickets</span>
+                    </aside>
+                    <div class="mock-main">
+                        <div class="mock-head"><h3>Infrastructure overview</h3><span class="tag">Sample data</span></div>
+                        <div class="kpis">
+                            <div class="kpi"><small>Devices online</small><div>148</div></div>
+                            <div class="kpi"><small>Uptime</small><div>99.98%</div></div>
+                            <div class="kpi"><small>Open tickets</small><div>3</div></div>
+                        </div>
+                        <svg viewBox="0 0 600 120" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0" stop-color="#00a2c7" stop-opacity=".22"/>
+                                    <stop offset="1" stop-color="#00a2c7" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            <g class="grid-lines" stroke-width="1">
+                                <line x1="0" y1="30" x2="600" y2="30"/>
+                                <line x1="0" y1="60" x2="600" y2="60"/>
+                                <line x1="0" y1="90" x2="600" y2="90"/>
+                            </g>
+                            <path d="M0 88 C60 78 90 48 150 56 S250 92 310 66 S420 24 480 40 S560 60 600 32 L600 120 L0 120Z" fill="url(#area-fill)"/>
+                            <path d="M0 88 C60 78 90 48 150 56 S250 92 310 66 S420 24 480 40 S560 60 600 32" fill="none" stroke="#00a2c7" stroke-width="2.5"/>
+                        </svg>
                     </div>
                 </div>
-                <div class="about-text slide-in-right">
-                    <h4 class="subtitle">About Us</h4>
-                    <h2>The <span class="gradient-text">Bullet</span> Standard</h2>
-                    <p>As a fast-growing technology startup, BULLET IT Solutions is built on agility, modern innovation, and absolute dedication. We deliver enterprise-grade technology tailored perfectly to your unique challenges.</p>
-                    
-                    <div class="feature-list">
-                        <div class="feature-item">
+            </section>
+        </div>
+
+        <!-- Services strip + Impact band -->
+        <section id="services" class="svc-band">
+            <div class="container">
+                <div class="svc">
+                    <article class="reveal">
+                        <div class="svc-icon"><i class="fas fa-cloud"></i></div>
+                        <h3>Cloud Solutions</h3>
+                        <div class="tagline">Scale without the hardware.</div>
+                        <p>Migration, hosting and backups on AWS, Azure and Google Cloud.</p>
+                        <a href="#contact">Details <span><i class="fas fa-arrow-right"></i></span></a>
+                    </article>
+                    <article class="reveal d1">
+                        <div class="svc-icon"><i class="fas fa-shield-halved"></i></div>
+                        <h3>Cybersecurity</h3>
+                        <div class="tagline">Stay protected around the clock.</div>
+                        <p>Firewalls, endpoint protection, security audits and staff awareness training.</p>
+                        <a href="#contact">Details <span><i class="fas fa-arrow-right"></i></span></a>
+                    </article>
+                    <article class="reveal d2">
+                        <div class="svc-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Networking</h3>
+                        <div class="tagline">Fast, stable connections.</div>
+                        <p>Office networks, Wi-Fi, VPNs and secure remote access.</p>
+                        <a href="#contact">Details <span><i class="fas fa-arrow-right"></i></span></a>
+                    </article>
+                    <article class="reveal d3">
+                        <div class="svc-icon"><i class="fas fa-code"></i></div>
+                        <h3>Software</h3>
+                        <div class="tagline">Built around how you work.</div>
+                        <p>Custom web apps, internal tools and system integrations.</p>
+                        <a href="#contact">Details <span><i class="fas fa-arrow-right"></i></span></a>
+                    </article>
+                    <article class="reveal d3">
+                        <div class="svc-icon"><i class="fas fa-headset"></i></div>
+                        <h3>IT Support</h3>
+                        <div class="tagline">Help when you need it.</div>
+                        <p>Helpdesk, maintenance and device management for your team.</p>
+                        <a href="#contact">Details <span><i class="fas fa-arrow-right"></i></span></a>
+                    </article>
+                </div>
+
+                <div class="why" id="stats">
+                    <div class="pillars reveal" aria-hidden="true">
+                        <div class="p1">Business</div>
+                        <div class="p2">Technology</div>
+                        <div class="p3">Security</div>
+                        <div class="p4">Operations</div>
+                        <span class="core"></span>
+                    </div>
+                    <div class="why-text reveal d1">
+                        <span class="eyebrow">Our impact</span>
+                        <h2 class="section-title">One partner for every part of your IT</h2>
+                        <p>We connect your business goals, technology, security and day-to-day operations, so you deal with one team instead of five vendors. Delivered on time and within budget.</p>
+                        <div class="stats">
+                            <div class="stat"><strong><span class="counter" data-target="98">98</span>%</strong><small>Client satisfaction</small></div>
+                            <div class="stat"><strong><span class="counter" data-target="88">88</span>%</strong><small>Faster delivery</small></div>
+                            <div class="stat"><strong><span class="counter" data-target="24">24</span>/7</strong><small>Support &amp; monitoring</small></div>
+                            <div class="stat"><strong><span class="counter" data-target="10">10</span>x</strong><small>Scalability focus</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="section">
+            <div class="container about-grid">
+                <div class="about-visual reveal">
+                    <img src="assets/logo.jpg" alt="BULLET IT Solutions" class="about-logo">
+                    <div class="about-badge"><i class="fas fa-location-dot"></i><span><b>Based in Galle, Sri Lanka</b><br>Serving businesses across the island</span></div>
+                </div>
+                <div class="about-text reveal d1">
+                    <span class="eyebrow">About us</span>
+                    <h2 class="section-title">The <span class="hl">Bullet</span> standard</h2>
+                    <p>BULLET IT Solutions is a fast-growing technology company built on agility, modern engineering and real dedication. We deliver enterprise-grade technology shaped around your business, not the other way round.</p>
+                    <div class="features">
+                        <div class="feature">
                             <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                             <div>
-                                <h5>Rapid Deployment</h5>
-                                <p>Agile methodologies ensuring faster time-to-market.</p>
+                                <h3>Rapid deployment</h3>
+                                <p>Agile methods that get your systems live faster.</p>
                             </div>
                         </div>
-                        <div class="feature-item">
+                        <div class="feature">
                             <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
                             <div>
-                                <h5>Military-Grade Security</h5>
-                                <p>Proactive threat mitigation and zero-trust architectures.</p>
+                                <h3>Security first</h3>
+                                <p>Proactive threat protection and zero-trust architecture from day one.</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                            <div>
+                                <h3>One accountable team</h3>
+                                <p>A single point of contact from first assessment to ongoing support.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services section-padding">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h4 class="subtitle">Capabilities</h4>
-                <h2>Enterprise <span class="gradient-text">Solutions</span></h2>
-                <p>Comprehensive technological ecosystems designed to scale with your ambitions.</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="glass-card service-card zoom-in delay-1">
-                    <div class="card-glow"></div>
-                    <i class="fas fa-layer-group service-icon"></i>
-                    <h3>Custom Software Architecture</h3>
-                    <p>Bespoke software solutions built on modern, resilient stacks to power your core business operations.</p>
-                    <a href="#contact" class="learn-more">Discuss Architecture <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="glass-card service-card zoom-in delay-2">
-                    <div class="card-glow"></div>
-                    <i class="fas fa-server service-icon"></i>
-                    <h3>Cloud Infrastructure</h3>
-                    <p>High-availability cloud migrations, DevOps automation, and scalable serverless ecosystems.</p>
-                    <a href="#contact" class="learn-more">Plan Migration <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="glass-card service-card zoom-in delay-3">
-                    <div class="card-glow"></div>
-                    <i class="fas fa-fingerprint service-icon"></i>
-                    <h3>Advanced Cybersecurity</h3>
-                    <p>End-to-end security audits, penetration testing, and continuous compliance monitoring.</p>
-                    <a href="#contact" class="learn-more">Request Audit <i class="fas fa-arrow-right"></i></a>
-                </div>
+        <!-- Contact -->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <div class="contact-wrapper reveal">
+                    <div class="contact-info">
+                        <span class="eyebrow">Contact</span>
+                        <h2 class="section-title">Let's talk about your IT</h2>
+                        <p>Tell us what you need and we'll get back to you within 24 hours with a free first assessment.</p>
 
-                <div class="glass-card service-card zoom-in delay-1">
-                    <div class="card-glow"></div>
-                    <i class="fas fa-network-wired service-icon"></i>
-                    <h3>Network Engineering</h3>
-                    <p>Design and implementation of robust, high-speed corporate networking architectures.</p>
-                    <a href="#contact" class="learn-more">Consult Experts <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats-section section-padding">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item fade-in">
-                    <h3 class="counter" data-target="98">0</h3><span class="stat-suffix">%</span>
-                    <p>Client Satisfaction</p>
-                </div>
-                <div class="stat-item fade-in delay-1">
-                    <h3 class="counter" data-target="88">0</h3><span class="stat-suffix">%</span>
-                    <p>Faster Delivery</p>
-                </div>
-                <div class="stat-item fade-in delay-2">
-                    <h3 class="counter" data-target="24">0</h3><span class="stat-suffix">/7</span>
-                    <p>Support & Monitoring</p>
-                </div>
-                <div class="stat-item fade-in delay-3">
-                    <h3 class="counter" data-target="10">0</h3><span class="stat-suffix">X</span>
-                    <p>Scalability Focus</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section-padding">
-        <div class="container">
-            <div class="contact-wrapper glass-card fade-in">
-                <div class="contact-info">
-                    <h2>Initiate <span class="gradient-text">Contact</span></h2>
-                    <p>Partner with BULLET IT Solutions to redefine your technological capabilities.</p>
-                    
-                    <div class="info-list">
-                        <div class="info-item">
-                            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-                            <div>
-                                <h4>Headquarters</h4>
-                                <span>Galle, Sri Lanka</span>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <div class="icon-box"><i class="fas fa-location-dot"></i></div>
+                                <div>
+                                    <h3>Headquarters</h3>
+                                    <span>Galle, Sri Lanka</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="icon-box"><i class="fas fa-envelope"></i></div>
-                            <div>
-                                <h4>Email Us</h4>
-                                <span>bullet.itsolutions@gmail.com</span>
+                            <div class="info-item">
+                                <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                                <div>
+                                    <h3>Email us</h3>
+                                    <a href="mailto:bullet.itsolutions@gmail.com">bullet.itsolutions@gmail.com</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
-                            <div>
-                                <h4>Call Us</h4>
-                                <span>+94 76 301 4997</span>
-                                <br><span>+94 75 342 9801</span>
+                            <div class="info-item">
+                                <div class="icon-box"><i class="fas fa-phone"></i></div>
+                                <div>
+                                    <h3>Call us</h3>
+                                    <a href="tel:+94763014997">+94 76 301 4997</a>
+                                    <a href="tel:+94753429801">+94 75 342 9801</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="contact-form-container">
+
                     <form class="contact-form" action="https://formsubmit.co/bullet.itsolutions@gmail.com" method="POST">
-                        <!-- Disabling captcha for a smoother experience (optional) -->
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
-                        
+
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Full Name</label>
-                                <input type="text" name="name" placeholder="Amal Fernando" required>
+                                <label for="f-name">Full name</label>
+                                <input id="f-name" type="text" name="name" placeholder="Amal Fernando" autocomplete="name" required>
                             </div>
                             <div class="form-group">
-                                <label>Email Address</label>
-                                <input type="email" name="email" placeholder="amalfernando@mail.com" required>
+                                <label for="f-email">Email address</label>
+                                <input id="f-email" type="email" name="email" placeholder="amalfernando@mail.com" autocomplete="email" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Subject</label>
-                            <input type="text" name="_subject" placeholder="Project Inquiry" required>
+                            <label for="f-subject">Subject</label>
+                            <input id="f-subject" type="text" name="_subject" placeholder="Project inquiry" required>
                         </div>
                         <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" placeholder="Tell us about your requirements..." rows="4" required></textarea>
+                            <label for="f-message">Message</label>
+                            <textarea id="f-message" name="message" placeholder="Tell us about your requirements..." rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn primary-btn full-width">Send Transmission <i class="fas fa-paper-plane"></i></button>
+                        <button type="submit" class="btn btn-dark btn-block">Send message <span class="arrow"><i class="fas fa-paper-plane"></i></span></button>
+                        <p class="form-status" role="status" aria-live="polite"></p>
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/logo.jpg" alt="Logo" class="footer-logo">
-                    <p>Enterprise IT Solutions built for speed, precision, and absolute reliability.</p>
+                    <a href="#home" class="logo">
+                        <img src="assets/logo.jpg" alt="" class="footer-logo">
+                        <span>BULLET <span class="logo-accent">IT</span></span>
+                    </a>
+                    <p>Enterprise IT solutions built for speed, precision and reliability.</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h3>Quick links</h3>
                     <ul>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About us</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="privacy-policy.html">Privacy policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <h4>Connect</h4>
+                    <h3>Connect</h3>
                     <div class="social-icons">
-                        <a href="https://www.linkedin.com/company/bullet-it-solutions-lanka/"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/team-of-bullet-it-solutions"><i class="fab fa-github"></i></a>
+                        <a class="icon-btn linkedin" href="https://www.linkedin.com/company/bullet-it-solutions-lanka/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="icon-btn" href="https://github.com/team-of-bullet-it-solutions" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="icon-btn" href="mailto:bullet.itsolutions@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 BULLET IT Solutions. All Rights Reserved.</p>
+                <p>&copy; <span class="year">2026</span> BULLET IT Solutions. All rights reserved.</p>
+                <p>Galle, Sri Lanka</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="js/main.js"></script>
 </body>
 </html>
